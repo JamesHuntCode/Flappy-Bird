@@ -14,7 +14,7 @@ namespace FlappyBird
     {
         #region classes and objects used
 
-        //private Bird playerIcon;
+        private Bird playerIcon;
         //private List<Pipe> pipes = new List<Pipe>();
 
         public Form1()
@@ -44,8 +44,15 @@ namespace FlappyBird
 
         private void initGame()
         {
+            // Add pipes
+
+
+            // Add bird 
+            this.playerIcon = new Bird(20, (this.picFlappyBird.Width / 2), (this.picFlappyBird.Height / 2));
+
+            // Refresh game
             Timer refresh = new Timer();
-            refresh.Interval = 10;
+            refresh.Interval = 30;
             refresh.Tick += new EventHandler(this.refreshGame);
             refresh.Start();
         }
@@ -63,13 +70,14 @@ namespace FlappyBird
         {
             // Create canvas
             Graphics FlappyBird = this.picFlappyBird.CreateGraphics();
-            FlappyBird.Clear(Color.LightBlue);
+            FlappyBird.Clear(ColorTranslator.FromHtml("#333"));
 
             // Draw pipes
 
 
             // Draw player icon
-
+            SolidBrush playerBrush = new SolidBrush(Color.White);
+            FlappyBird.FillEllipse(playerBrush, this.playerIcon.GetX(), this.playerIcon.GetY(), this.playerIcon.GetSize(), this.playerIcon.GetSize());
         }
 
         #endregion
@@ -80,7 +88,7 @@ namespace FlappyBird
         {
             if(e.KeyCode == Keys.Space)
             {
-
+                this.playerIcon.Fly();
             }
         }
 
