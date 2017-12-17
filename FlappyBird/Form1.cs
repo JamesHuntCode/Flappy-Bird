@@ -23,11 +23,11 @@ namespace FlappyBird
 
             this.Text = "Flappy Bird - James Hunt";
 
-            this.Height = 800;
-            this.Width = 800;
+            this.Height = 640; // 640
+            this.Width = 600;
 
-            this.picFlappyBird.Height = 800;
-            this.picFlappyBird.Width = 800;
+            this.picFlappyBird.Height = 600;
+            this.picFlappyBird.Width = 600;
             this.picFlappyBird.Location = new Point(0, 0);
 
             this.KeyDown += this.Form1_KeyDown;
@@ -52,7 +52,7 @@ namespace FlappyBird
 
             // Refresh game
             Timer refresh = new Timer();
-            refresh.Interval = 30;
+            refresh.Interval = 20;
             refresh.Tick += new EventHandler(this.refreshGame);
             refresh.Start();
         }
@@ -77,7 +77,9 @@ namespace FlappyBird
 
             // Draw player icon
             SolidBrush playerBrush = new SolidBrush(Color.White);
-            FlappyBird.FillEllipse(playerBrush, this.playerIcon.GetX(), this.playerIcon.GetY(), this.playerIcon.GetSize(), this.playerIcon.GetSize());
+            FlappyBird.FillEllipse(playerBrush, Convert.ToInt32(this.playerIcon.GetX()), Convert.ToInt32(this.playerIcon.GetY()), this.playerIcon.GetSize(), this.playerIcon.GetSize());
+
+            this.playerIcon.Fly(this.picFlappyBird.Height - this.playerIcon.GetSize());
         }
 
         #endregion
@@ -88,7 +90,7 @@ namespace FlappyBird
         {
             if(e.KeyCode == Keys.Space)
             {
-                this.playerIcon.Fly();
+                this.playerIcon.Jump();
             }
         }
 

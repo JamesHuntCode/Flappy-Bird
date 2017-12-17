@@ -10,12 +10,13 @@ namespace FlappyBird
     {
         // Properties 
         int size;
-        int posX;
-        int posY;
+        double posX;
+        double posY;
 
         // Mechanics behind bird flight
-        int gravity = 10;
-        int upthrust = 20;
+        double vel = 0;
+        double gravity = 2;
+        double upthrust = -25;
 
         // Constructor:
         public Bird(int s, int x, int y)
@@ -47,20 +48,33 @@ namespace FlappyBird
             return this.size;
         }
 
-        public int GetX()
+        public double GetX()
         {
             return this.posX;
         }
 
-        public int GetY()
+        public double GetY()
         {
             return this.posY;
         }
 
         // Custom Methods:
-        public void Fly()
+        public void Fly(int height)
         {
+            this.vel += this.gravity;
+            this.vel *= 0.9;
+            this.posY += this.vel;
 
+            if (this.posY > height)
+            {
+                this.posY = height;
+                this.vel = 0;
+            }
+        }
+
+        public void Jump()
+        {
+            this.vel += this.upthrust;
         }
     }
 }
