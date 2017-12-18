@@ -77,9 +77,9 @@ namespace FlappyBird
         }
 
         // Check if player has hit a pipe
-        public void HitsPlayer(Bird that)
+        public bool HitsPlayer(Bird that)
         {
-
+            return true;
         }
     }
 }

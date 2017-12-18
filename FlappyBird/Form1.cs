@@ -44,12 +44,18 @@ namespace FlappyBird
 
         private void initGame()
         {
-            // Add pipes
+            // Add pipes   
+            Random rnd = new Random();
+           
             int xOffset = 0;
 
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 200; i++)
             {
-                this.addPipe(xOffset);
+                int pipeHeight = rnd.Next(this.picFlappyBird.Height / 2, this.picFlappyBird.Height);
+
+                this.addPipe(xOffset, pipeHeight);
+
+                // Space between pipes
                 xOffset += 150;
             }
 
@@ -63,13 +69,9 @@ namespace FlappyBird
             refresh.Start();
         }
 
-        private void addPipe(int offsetVal)
+        private void addPipe(int offsetVal, int randomHeight)
         {
-            Random rnd = new Random();
-  
-            int pipeHeight = rnd.Next(this.picFlappyBird.Height / 2, this.picFlappyBird.Height);
-
-            this.pipes.Add(new Pipe(pipeHeight, 50, this.picFlappyBird.Width + offsetVal, pipeHeight));
+            this.pipes.Add(new Pipe(randomHeight, 50, this.picFlappyBird.Width + offsetVal, randomHeight));
         }
 
         private void refreshGame(object sender, EventArgs e)
@@ -93,10 +95,23 @@ namespace FlappyBird
             for (int i = this.pipes.Count - 1; i > 0; i--)
             {
                 FlappyBird.FillRectangle(pipeBrush, pipes[i].GetX(), pipes[i].GetH(), pipes[i].GetW(), pipes[i].GetH());
-                this.pipes[i].Move();
-            }
 
-            
+                // Move pipe accross screen
+                this.pipes[i].Move();
+
+                // Check if pipe has hit player
+                if (this.pipes[i].HitsPlayer(this.playerIcon))
+                {
+                    // Restart game!
+                }
+
+                // Pipe is off the screen
+                if (this.pipes[i].GetX() + this.pipes[i].GetW() < 0)
+                {
+                    this.pipes.Remove(this.pipes[i]);
+                    MessageBox.Show(this.pipes.Count.ToString());
+                }
+            }
 
             // Draw player icon
             SolidBrush playerBrush = new SolidBrush(Color.White);
