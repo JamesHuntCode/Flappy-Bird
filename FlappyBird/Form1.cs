@@ -49,12 +49,12 @@ namespace FlappyBird
            
             int xOffset = 0;
 
-            for (int i = 0; i < 200; i++) // Spawn 200 pipes
+            for (int i = 0; i < 200; i++) 
             {
                 int pipeHeight = rnd.Next(0, this.picFlappyBird.Height);
 
                 // Check player can fit through gap
-                while (pipeHeight + 150 > this.picFlappyBird.Height)
+                while ((pipeHeight + 100 > this.picFlappyBird.Height) || (pipeHeight - 100 < 0))
                 {
                     pipeHeight = rnd.Next(0, this.picFlappyBird.Height);
                 }
@@ -63,9 +63,9 @@ namespace FlappyBird
 
                 // Pipe from bottom
                 this.addPipe(xOffset, pipeHeight + 100, false);
-
+                
                 // horizontal space between pipes
-                xOffset += 150;
+                xOffset += 200;
             }
 
             // Add bird 
@@ -82,7 +82,7 @@ namespace FlappyBird
         {
             if (fromTop)
             {
-                this.pipes.Add(new Pipe(randomHeight, 50, this.picFlappyBird.Width + offsetVal, 0, true));
+                this.pipes.Add(new Pipe(randomHeight, 50, (this.picFlappyBird.Width) + offsetVal, 0, true));
             }
             else
             {
@@ -108,7 +108,7 @@ namespace FlappyBird
             // Draw pipes
             SolidBrush pipeBrush = new SolidBrush(Color.Green);
 
-            for (int i = this.pipes.Count - 1; i > 0; i--)
+            for (int i = 0; i < this.pipes.Count; i++)
             {
                 if (this.pipes[i].GetStatus())
                 {
@@ -125,7 +125,8 @@ namespace FlappyBird
                 // Check if pipe has hit player
                 if (this.pipes[i].HitsPlayer(this.playerIcon))
                 {
-                    // Restart game
+                    Application.Restart();
+                    Environment.Exit(0);
                 }
 
                 // Pipe is off the screen

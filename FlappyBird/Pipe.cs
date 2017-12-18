@@ -11,11 +11,9 @@ namespace FlappyBird
         // Properties:
         int height;
         int width;
-
         int posX;
         int posY;
         bool fromTop;
-
         int velocity = 3;
 
         // Constructor:
@@ -47,6 +45,11 @@ namespace FlappyBird
         public void SetY(int y)
         {
             this.posY = y;
+        }
+
+        public void SetStatus(bool condition)
+        {
+            this.fromTop = condition;
         }
 
         // Getter Methods:
@@ -86,7 +89,10 @@ namespace FlappyBird
         // Check if player has hit a pipe
         public bool HitsPlayer(Bird that)
         {
-            return true;
+            return !(this.posX > (that.GetX() + that.GetSize()) ||
+                this.posX + this.width < that.GetX() ||
+                this.posY > that.GetY() + that.GetSize() ||
+                this.posY + this.height < that.GetY()); 
         }
     }
 }
