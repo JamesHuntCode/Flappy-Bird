@@ -49,13 +49,22 @@ namespace FlappyBird
            
             int xOffset = 0;
 
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < 200; i++) // Spawn 200 pipes
             {
-                int pipeHeight = rnd.Next(this.picFlappyBird.Height / 2, this.picFlappyBird.Height);
+                int pipeHeight = rnd.Next(0, this.picFlappyBird.Height);
 
-                this.addPipe(xOffset, pipeHeight);
+                // Check player can fit through gap
+                while (pipeHeight + 150 > this.picFlappyBird.Height)
+                {
+                    pipeHeight = rnd.Next(0, this.picFlappyBird.Height);
+                }
+                // Pipe from top
+                this.addPipe(xOffset, pipeHeight, true);
 
-                // Space between pipes
+                // Pipe from bottom
+                this.addPipe(xOffset, pipeHeight + 100, false);
+
+                // horizontal space between pipes
                 xOffset += 150;
             }
 
@@ -69,9 +78,16 @@ namespace FlappyBird
             refresh.Start();
         }
 
-        private void addPipe(int offsetVal, int randomHeight)
+        private void addPipe(int offsetVal, int randomHeight, bool fromTop)
         {
-            this.pipes.Add(new Pipe(randomHeight, 50, this.picFlappyBird.Width + offsetVal, randomHeight));
+            if (fromTop)
+            {
+                this.pipes.Add(new Pipe(randomHeight, 50, this.picFlappyBird.Width + offsetVal, 0, true));
+            }
+            else
+            {
+                this.pipes.Add(new Pipe(randomHeight, 50, this.picFlappyBird.Width + offsetVal, randomHeight, false));
+            }
         }
 
         private void refreshGame(object sender, EventArgs e)
@@ -94,7 +110,14 @@ namespace FlappyBird
 
             for (int i = this.pipes.Count - 1; i > 0; i--)
             {
-                FlappyBird.FillRectangle(pipeBrush, pipes[i].GetX(), pipes[i].GetH(), pipes[i].GetW(), pipes[i].GetH());
+                if (this.pipes[i].GetStatus())
+                {
+                    FlappyBird.FillRectangle(pipeBrush, pipes[i].GetX(), 0, pipes[i].GetW(), pipes[i].GetH());
+                }
+                else
+                {
+                    FlappyBird.FillRectangle(pipeBrush, pipes[i].GetX(), pipes[i].GetH(), pipes[i].GetW(), this.picFlappyBird.Height - pipes[i].GetH());
+                }
 
                 // Move pipe accross screen
                 this.pipes[i].Move();
@@ -102,14 +125,13 @@ namespace FlappyBird
                 // Check if pipe has hit player
                 if (this.pipes[i].HitsPlayer(this.playerIcon))
                 {
-                    // Restart game!
+                    // Restart game
                 }
 
                 // Pipe is off the screen
                 if (this.pipes[i].GetX() + this.pipes[i].GetW() < 0)
                 {
                     this.pipes.Remove(this.pipes[i]);
-                    MessageBox.Show(this.pipes.Count.ToString());
                 }
             }
 

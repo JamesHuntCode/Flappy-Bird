@@ -14,16 +14,18 @@ namespace FlappyBird
 
         int posX;
         int posY;
+        bool fromTop;
 
         int velocity = 3;
 
         // Constructor:
-        public Pipe(int h, int w, int x, int y)
+        public Pipe(int h, int w, int x, int y, bool fromT)
         {
             this.height = h;
             this.width = w;
             this.posX = x;
             this.posY = y;
+            this.fromTop = fromT;
         }
 
         // Setter Methods:
@@ -66,6 +68,11 @@ namespace FlappyBird
         public int GetY()
         {
             return this.posY;
+        }
+
+        public bool GetStatus()
+        {
+            return this.fromTop;
         }
 
         // Custom Methods:
