@@ -30,6 +30,9 @@ namespace FlappyBird
             this.picFlappyBird.Width = 600;
             this.picFlappyBird.Location = new Point(0, 0);
 
+            this.lblScoreCount.BackColor = ColorTranslator.FromHtml("#333");
+            this.lblScoreCount.Text = "0";
+
             this.KeyDown += this.Form1_KeyDown;
         }
 
@@ -134,6 +137,9 @@ namespace FlappyBird
                 {
                     this.pipes.Remove(this.pipes[i]);
                 }
+
+                // Update score counter:
+
             }
 
             // Draw player icon

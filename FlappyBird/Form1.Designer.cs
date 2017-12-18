@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.picFlappyBird = new System.Windows.Forms.PictureBox();
+            this.lblScoreCount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picFlappyBird)).BeginInit();
             this.SuspendLayout();
             // 
@@ -40,11 +41,24 @@
             this.picFlappyBird.TabIndex = 0;
             this.picFlappyBird.TabStop = false;
             // 
+            // lblScoreCount
+            // 
+            this.lblScoreCount.AutoSize = true;
+            this.lblScoreCount.BackColor = System.Drawing.Color.Transparent;
+            this.lblScoreCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblScoreCount.ForeColor = System.Drawing.Color.White;
+            this.lblScoreCount.Location = new System.Drawing.Point(-3, -2);
+            this.lblScoreCount.Name = "lblScoreCount";
+            this.lblScoreCount.Size = new System.Drawing.Size(63, 32);
+            this.lblScoreCount.TabIndex = 1;
+            this.lblScoreCount.Text = "888";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1050, 754);
+            this.Controls.Add(this.lblScoreCount);
             this.Controls.Add(this.picFlappyBird);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -53,12 +67,14 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picFlappyBird)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.PictureBox picFlappyBird;
+        private System.Windows.Forms.Label lblScoreCount;
     }
 }
 
