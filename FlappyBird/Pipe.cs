@@ -15,6 +15,8 @@ namespace FlappyBird
         int posX;
         int posY;
 
+        int velocity = 3;
+
         // Constructor:
         public Pipe(int h, int w, int x, int y)
         {
@@ -67,6 +69,14 @@ namespace FlappyBird
         }
 
         // Custom Methods:
+
+        // Move pipe left accross the screen
+        public void Move()
+        {
+            this.posX -= this.velocity;
+        }
+
+        // Check if player has hit a pipe
         public void HitsPlayer(Bird that)
         {
 

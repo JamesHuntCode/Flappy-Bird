@@ -15,7 +15,7 @@ namespace FlappyBird
         #region classes and objects used
 
         private Bird playerIcon;
-        //private List<Pipe> pipes = new List<Pipe>();
+        private List<Pipe> pipes = new List<Pipe>();
 
         public Form1()
         {
@@ -45,7 +45,13 @@ namespace FlappyBird
         private void initGame()
         {
             // Add pipes
+            int xOffset = 0;
 
+            for (int i = 0; i < 7; i++)
+            {
+                this.addPipe(xOffset);
+                xOffset += 150;
+            }
 
             // Add bird 
             this.playerIcon = new Bird(20, (this.picFlappyBird.Width / 2), (this.picFlappyBird.Height / 2));
@@ -55,6 +61,15 @@ namespace FlappyBird
             refresh.Interval = 20;
             refresh.Tick += new EventHandler(this.refreshGame);
             refresh.Start();
+        }
+
+        private void addPipe(int offsetVal)
+        {
+            Random rnd = new Random();
+  
+            int pipeHeight = rnd.Next(this.picFlappyBird.Height / 2, this.picFlappyBird.Height);
+
+            this.pipes.Add(new Pipe(pipeHeight, 50, this.picFlappyBird.Width + offsetVal, pipeHeight));
         }
 
         private void refreshGame(object sender, EventArgs e)
@@ -73,7 +88,15 @@ namespace FlappyBird
             FlappyBird.Clear(ColorTranslator.FromHtml("#333"));
 
             // Draw pipes
+            SolidBrush pipeBrush = new SolidBrush(Color.Green);
 
+            for (int i = this.pipes.Count - 1; i > 0; i--)
+            {
+                FlappyBird.FillRectangle(pipeBrush, pipes[i].GetX(), pipes[i].GetH(), pipes[i].GetW(), pipes[i].GetH());
+                this.pipes[i].Move();
+            }
+
+            
 
             // Draw player icon
             SolidBrush playerBrush = new SolidBrush(Color.White);
