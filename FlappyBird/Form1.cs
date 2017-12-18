@@ -16,6 +16,7 @@ namespace FlappyBird
 
         private Bird playerIcon;
         private List<Pipe> pipes = new List<Pipe>();
+        private double scoreCount = 0;
 
         public Form1()
         {
@@ -31,7 +32,7 @@ namespace FlappyBird
             this.picFlappyBird.Location = new Point(0, 0);
 
             this.lblScoreCount.BackColor = ColorTranslator.FromHtml("#333");
-            this.lblScoreCount.Text = "0";
+            this.lblScoreCount.Text = scoreCount.ToString();
 
             this.KeyDown += this.Form1_KeyDown;
         }
@@ -85,11 +86,11 @@ namespace FlappyBird
         {
             if (fromTop)
             {
-                this.pipes.Add(new Pipe(randomHeight, 50, (this.picFlappyBird.Width) + offsetVal, 0, true));
+                this.pipes.Add(new Pipe(randomHeight, 50, (this.picFlappyBird.Width) + offsetVal, 0, true, true));
             }
             else
             {
-                this.pipes.Add(new Pipe(randomHeight, 50, this.picFlappyBird.Width + offsetVal, randomHeight, false));
+                this.pipes.Add(new Pipe(randomHeight, 50, this.picFlappyBird.Width + offsetVal, randomHeight, false, true));
             }
         }
 
@@ -138,8 +139,14 @@ namespace FlappyBird
                     this.pipes.Remove(this.pipes[i]);
                 }
 
-                // Update score counter:
+                // Update score
+                if (this.pipes[i].GetX() < this.picFlappyBird.Width / 2 && this.pipes[i].GetActive())
+                {
+                    this.scoreCount += 0.5;
+                    this.pipes[i].SetActive(false);
+                }
 
+                this.lblScoreCount.Text = this.scoreCount.ToString();
             }
 
             // Draw player icon

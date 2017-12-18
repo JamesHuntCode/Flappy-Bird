@@ -14,16 +14,18 @@ namespace FlappyBird
         int posX;
         int posY;
         bool fromTop;
+        bool active;
         int velocity = 3;
 
         // Constructor:
-        public Pipe(int h, int w, int x, int y, bool fromT)
+        public Pipe(int h, int w, int x, int y, bool fromT, bool act)
         {
             this.height = h;
             this.width = w;
             this.posX = x;
             this.posY = y;
             this.fromTop = fromT;
+            this.active = act;
         }
 
         // Setter Methods:
@@ -52,6 +54,11 @@ namespace FlappyBird
             this.fromTop = condition;
         }
 
+        public void SetActive(bool status)
+        {
+            this.active = status;
+        }
+
         // Getter Methods:
         public int GetH()
         {
@@ -76,6 +83,11 @@ namespace FlappyBird
         public bool GetStatus()
         {
             return this.fromTop;
+        }
+
+        public bool GetActive()
+        {
+            return this.active;
         }
 
         // Custom Methods:
