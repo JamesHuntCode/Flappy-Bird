@@ -23,7 +23,7 @@ namespace FlappyBird
 
             this.Text = "Flappy Bird - James Hunt";
 
-            this.Height = 640; // 640
+            this.Height = 640;
             this.Width = 600;
 
             this.picFlappyBird.Height = 600;
