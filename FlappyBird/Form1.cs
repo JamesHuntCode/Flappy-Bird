@@ -116,11 +116,11 @@ namespace FlappyBird
             {
                 if (this.pipes[i].GetStatus())
                 {
-                    FlappyBird.FillRectangle(pipeBrush, pipes[i].GetX(), 0, pipes[i].GetW(), pipes[i].GetH());
+                    FlappyBird.FillRectangle(pipeBrush, this.pipes[i].GetX(), 0, this.pipes[i].GetW(), this.pipes[i].GetH());
                 }
                 else
                 {
-                    FlappyBird.FillRectangle(pipeBrush, pipes[i].GetX(), pipes[i].GetH(), pipes[i].GetW(), this.picFlappyBird.Height - pipes[i].GetH());
+                    FlappyBird.FillRectangle(pipeBrush, this.pipes[i].GetX(), this.pipes[i].GetH(), this.pipes[i].GetW(), this.picFlappyBird.Height - this.pipes[i].GetH());
                 }
 
                 // Move pipe accross screen
