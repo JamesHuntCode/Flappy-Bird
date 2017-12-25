@@ -31,11 +31,27 @@ function draw() {
   for (let i = 0; i < topPipes.length; i++) {
     topPipes[i].update();
     topPipes[i].show();
+
+    if (topPipes[i].posX + topPipes[i].width < 0) {
+      topPipes.splice(i, 1);
+    }
+
+    if (topPipes[i].hits(bird)) {
+      console.log("DEAD");
+    }
   }
 
   for (let i = 0; i < bottomPipes.length; i++) {
     bottomPipes[i].update();
     bottomPipes[i].show();
+
+    if (bottomPipes[i].posX + bottomPipes[i].width < 0) {
+      bottomPipes.splice(i, 1);
+    }
+
+    if (bottomPipes[i].hits(bird)) {
+      console.log("DEAD");
+    }
   }
 }
 
