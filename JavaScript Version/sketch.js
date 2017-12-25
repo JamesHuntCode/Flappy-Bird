@@ -37,7 +37,7 @@ function draw() {
     }
 
     if (topPipes[i].hits(bird)) {
-      console.log("DEAD");
+      location.reload();
     }
   }
 
@@ -50,7 +50,7 @@ function draw() {
     }
 
     if (bottomPipes[i].hits(bird)) {
-      console.log("DEAD");
+      location.reload();
     }
   }
 }
