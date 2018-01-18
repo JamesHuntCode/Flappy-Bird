@@ -22,6 +22,7 @@ function bird(x, y) {
   }
 
   this.show = function() {
+    fill(0, 0, 150);
     ellipse(this.posX, this.posY, this.size, this.size);
   }
 }

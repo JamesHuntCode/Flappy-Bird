@@ -23,7 +23,7 @@ function setup() {
 }
 
 function draw() {
-  background(51);
+  background('#ffffff');
 
   bird.show();
   bird.updatePos();

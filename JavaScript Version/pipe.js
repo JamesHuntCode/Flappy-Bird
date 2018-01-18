@@ -10,6 +10,7 @@ function pipe(x, y, h) {
   }
 
   this.show = function() {
+    fill(0, 255, 0);
     rect(this.posX, this.posY, this.width, this.height);
   }
 
